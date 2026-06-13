@@ -1,0 +1,80 @@
+OSPFv2 Single-Area Configuration Modification Lab
+
+Overview
+
+This lab focused on modifying and optimizing an existing OSPFv2 single-area network in Cisco Packet Tracer. The objective was to understand how OSPF neighbor relationships are affected by timer settings and how routing decisions can be influenced by changing interface bandwidth values.
+
+Tasks Performed
+
+1. Connectivity Verification
+
+Before making any changes, end-to-end connectivity was verified by testing communication between all PCs and the web server. This confirmed that OSPF was functioning correctly and that all routes had been learned successfully.
+
+2. OSPF Hello and Dead Timer Modification
+
+The OSPF Hello and Dead intervals were modified on the link between R1 and R2.
+
+##Configuration Applied on R1##
+interface s0/0/0
+ ip ospf hello-interval 15
+ ip ospf dead-interval 60
+
+After applying these changes, the OSPF adjacency between R1 and R2 failed because both routers must use identical timer values to maintain a neighbor relationship.
+
+##Configuration Applied on R2##
+interface s0/0/0
+ ip ospf hello-interval 15
+ ip ospf dead-interval 60
+
+Once the timer values matched, the OSPF adjacency was successfully reestablished.
+
+3. OSPF Path Selection and Bandwidth Modification
+
+The route from PC1 (172.16.1.2) to the Web Server (64.100.1.2) was analyzed using the tracert command.
+
+Initially, OSPF selected the direct path through R2 because it had the lowest cost.
+
+Bandwidth Configuration
+
+To influence OSPF cost calculations, the bandwidth of interface Serial0/0/0 on R1 was modified:
+
+interface s0/0/0
+ bandwidth 64
+
+This command does not change the actual transmission speed of the interface. Instead, it changes the bandwidth value used by OSPF to calculate route metrics.
+
+4. Route Recalculation
+
+After modifying the bandwidth, OSPF recalculated the path cost and selected a new route through R3, demonstrating how OSPF dynamically chooses the lowest-cost path available in the network.
+
+5. Final Connectivity Verification
+
+Connectivity tests were performed again to verify that:
+
+* All PCs could communicate with each other.
+* All PCs could reach the web server.
+* OSPF adjacencies were fully operational.
+* Dynamic routing updates were functioning correctly.
+
+##Key Commands Used##
+
+Verify OSPF Neighbors
+show ip ospf neighbor
+show ip ospf interface
+show ip route ospf
+ip ospf hello-interval 15
+ip ospf dead-interval 60
+bandwidth 64
+ping
+tracert
+
+Skills Demonstrated
+
+* OSPFv2 configuration and optimization
+* OSPF Hello and Dead timer management
+* OSPF neighbor relationship troubleshooting
+* Dynamic route recalculation
+* OSPF metric and cost manipulation
+* Interface bandwidth configuration
+* Network verification and troubleshooting
+* End-to-end connectivity testing
