@@ -100,6 +100,64 @@ All hosts successfully maintained access to the Web Server.
 
 ---
 
+
+## ACL Verification Summary
+
+A named standard ACL called **File_Server_Restrictions** was successfully created on R1 to restrict access to the File Server. The ACL permits access only from the Web Manager workstation (PC1 - 192.168.20.4) and the Web Server (192.168.100.100), while denying all other traffic.
+
+### ACL Configuration
+
+```cisco
+ip access-list standard File_Server_Restrictions
+ permit host 192.168.20.4
+ permit host 192.168.100.100
+ deny any
+```
+
+### ACL Verification
+
+```cisco
+show access-lists
+```
+
+Output:
+
+```cisco
+Standard IP access list File_Server_Restrictions
+10 permit host 192.168.20.4
+20 permit host 192.168.100.100
+30 deny any
+```
+
+### ACL Application
+
+The ACL was applied outbound on interface Ethernet0/1/0:
+
+```cisco
+interface Ethernet0/1/0
+ ip access-group File_Server_Restrictions out
+```
+
+### Interface Verification
+
+```cisco
+show ip interface ethernet 0/1/0
+```
+
+Output:
+
+```cisco
+Outgoing access list is File_Server_Restrictions
+```
+
+### Results
+
+- PC1 (192.168.20.4) successfully accessed the File Server.
+- The Web Server (192.168.100.100) successfully accessed the File Server.
+- PC0 and PC2 were denied access to the File Server.
+- All hosts maintained connectivity to the Web Server.
+- The ACL was successfully configured, applied, and verified according to the security requirements of the lab.
+
 ## Author
 
 Elmer Chavarría
