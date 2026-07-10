@@ -198,6 +198,6 @@ Standard IP access list 1
 
 **Elmer Chavarría**
 
-Cybersecurity Student | Networking Enthusiast | FPV Drone Pilot
+Cybersecurity Student | Networking Enthusiast |
 
 Costa Rica
