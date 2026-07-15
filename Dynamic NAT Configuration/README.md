@@ -10,7 +10,7 @@ This Cisco Packet Tracer lab demonstrates **dynamic Network Address Translation 
 
 | Item | Address / purpose |
 | --- | --- |
-| Internal client networks | `172.16.0.0/24` |
+| Internal client networks | `172.16.10.0/24-172.16.10.0/24` |
 | R2 inside interface | `Serial0/0/1` |
 | R2 outside interface | `Serial0/0/0` |
 | Public NAT pool | `209.165.200.229` - `209.165.200.230` |
